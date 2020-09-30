@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="game-board">
+        <div class="board">
+            <div>
+                <app-tic-tac-toe *ngFor="let square of squares | slice: 0: 3;let i=index"
+                [value]="square"
+                (playerClick)="clickHandler(i)"
+                ></app-tic-tac-toe>
+            </div>
+            <div>
+                <app-tic-tac-toe *ngFor="let square of squares | slice: 3: 6;let i=index"
+                [value]="square"
+                (playerClick)="clickHandler(i+3)"
+                ></app-tic-tac-toe>
+            </div>
+            <div>
+                <app-tic-tac-toe *ngFor="let square of squares | slice: 6: 9;let i=index"
+                [value]="square"
+                (playerClick)="clickHandler(i+6)"
+                ></app-tic-tac-toe>
+            </div>
+        </div>
+    
+        <div class="gamemsg">
+            <div *ngIf="winner!=='tie' && (winner==='X'|| winner=='O')">
+                <h3> winner is {{winner}}</h3>
+        </div>
+        <div  *ngIf="winner =='tie'">
+            its a tie
+        </div>
+        </div>
+        <div *ngIf="gameover">Game over</div>
+        <button class="btn btn-info" (click)="restart()">Start Hame</button>
+    </div>
+    
+    
+</body>
+</html>
+

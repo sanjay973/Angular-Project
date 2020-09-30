@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <title>List drag and drop</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <a routerLink="/game">Click here for tic-tac-toe</a>
+    </div>
+
+    <div class="container card">
+    <div class="d-flex justify-content-between">
+        <div class="list-A container" style="border-right: 1px solid black;"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="data"
+        [cdkDropListConnectedTo]="[doneList]"
+        (cdkDropListDropped)="onDrop($event)"
+        >
+            <h1 class="card-header" style="text-align: center;">List A </h1>
+            <tr *ngFor="let d of data" cdkDrag>
+                <td class="list-group-item">{{d.name}}</td><br>
+            </tr>
+            <input class="form-control" type="text" #newTodo> <br>
+            <button class="btn btn-primary" (click)="postData(newTodo.value); newTodo.value='' ">Add Data</button>
+        </div>
+        <div class="list-B container"
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="done"
+            [cdkDropListConnectedTo]="todoList"
+            (cdkDropListDropped)="onDrop($event)"
+        >
+            <h1 class="card-header" style="text-align: center;">List B</h1>
+            <tr *ngFor="let d of done" cdkDrag>
+                <td class="list-group-item">{{d.name}}</td><br>
+            </tr>
+        </div>
+    </div>
+    <br><br>
+    </div>
+</body>
+
+</html>
